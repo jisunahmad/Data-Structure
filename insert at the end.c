@@ -1,54 +1,61 @@
 #include<stdio.h>
 #include<stdlib.h>
-struct node //creating a node
-{
-    int data; //node's data
-    struct node *link; //declaring a "struct node type" pointer that will point to the next node
-};
-void add_at_end(struct node **head,int data)
-{
-    struct node *ptr=*head; //ptr pointer is for storing the head pointer
-    struct node *ptr2= (struct node*)malloc(sizeof(struct node)); //ptr2 pointer is for storing the new node
-    ptr2->data=data;
-    ptr2->link=NULL;
-    while(ptr->link!=NULL) //start from ptr(which holds head), keep traversing the nodes untill null
-    {
-        ptr=ptr->link;
-    }
-    ptr->link=ptr2; //latest node in ptr was the last node, store the link of ptr2(new node) with the last node
 
+struct node
+{
+    int data;
+    struct node *link;
+};
+
+void del_last(struct node **head)
+{
+    if (*head == NULL) {
+        printf("List is empty. Cannot delete.\n");
+        return;
+    }
+
+    struct node *temp = *head; //initializing temp pointer with head pointer
+    struct node *temp2 = *head; //also initializing temp2 pointer with head pointer
+    while(temp2->link!=NULL) // temp2 will traverse to the end
+    {
+        temp=temp2;         //first whatever is in temp2 will be in temp
+        temp2=temp2->link;  //then temp2 will move to the next node
+    }
+
+        // temp2 will be always be one node ahead of temp
+    temp->link=NULL;    //temp will be the previous node of the last node after the loop, so temp will be unlinked with temp2
+    free(temp2);        // now free the temp2 (the last node)
+    temp=NULL;
 }
 int main()
 {
-    int data;
-    printf("Enter the data= ");
-    scanf("%d",&data); //inputting new node data
+    struct node *head = (struct node *)malloc(sizeof(struct node));
+    head->data = 45;
+    head->link = NULL;
 
-    struct node *head=(struct node*)malloc(sizeof(struct node)); //allocating memory for the "pointer of node" because the pointer needs an address
-    head->data=45;
-    head->link=NULL;
+    struct node *second = (struct node *)malloc(sizeof(struct node));
+    second->data = 98;
+    second->link = NULL;
 
-    struct node *second=(struct node*)malloc(sizeof(struct node));
-    second->data=98;
-    second->link=NULL;
+    struct node *third = (struct node *)malloc(sizeof(struct node));
+    third->data = 45;
+    third->link = NULL;
 
-    struct node *third=(struct node*)malloc(sizeof(struct node));
-    third->data=45;
-    third->link=NULL;
+    head->link = second;
+    second->link = third;
+    third->link = NULL;
 
-    head->link=second;
-    second->link=third;
-    third->link=NULL;
+    printf("Before deleting last node\n");
+    printf("%d->%d->%d->NULL\n\n", head->data, second->data, third->data);
 
-    printf("Before inserting node at a  end\n");
-    printf("%d->%d->%d->NULL\n\n",head->data,second->data,third->data);
-
-    add_at_end(&head,data);
-    printf("After inserting at end\n");
-    while(head!=NULL)
+    del_last(&head);
+    printf("After deleting last node\n");
+    while (head != NULL)
     {
-        printf("%d->",head->data);
-        head=head->link;
+        printf("%d->", head->data);
+        head = head->link;
     }
     printf("NULL");
+
+    return 0;
 }
