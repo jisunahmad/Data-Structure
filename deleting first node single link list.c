@@ -9,19 +9,20 @@ struct node
 
 void del_fist(struct node **head)
 {
-    if (*head == NULL) {
+    if (*head == NULL) {            //if the head pointer is empty then there is no node
         printf("List is empty. Cannot delete.\n");
         return;
     }
 
-    struct node *temp = *head;
-    *head = (*head)->link;
-    free(temp);
-    temp->link = NULL;
+    struct node *temp = *head;       //assign the head to temp that will be deleted later and head will be assigned to next node
+    *head = (*head)->link;              //head will move to the next node
+    free(temp);                        //only pointer that holds the deleted node will be free
+    temp->link = NULL;                  // disconnect the temp pointer
 }
 
 int main()
 {
+    
     struct node *head = (struct node *)malloc(sizeof(struct node));
     head->data = 45;
     head->link = NULL;
@@ -43,10 +44,10 @@ int main()
 
     del_fist(&head);
     printf("After deleting first node\n");
-    while (head != NULL)
+    while (head != NULL)        //loop will continue until the current node link will be null
     {
         printf("%d->", head->data);
-        head = head->link;
+        head = head->link;      //loop will traverse
     }
     printf("NULL");
 
