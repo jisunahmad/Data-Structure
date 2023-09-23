@@ -9,31 +9,31 @@ struct node
 
 void add_at_pos(struct node **head, int data, int pos)
 {
-    struct node *ptr = *head;
-    struct node *ptr2 = (struct node *)malloc(sizeof(struct node));
-    ptr2->data = data;
-    ptr2->link = NULL;
+    struct node *ptr = *head;  //to traverse through the list
+    struct node *ptr2 = (struct node *)malloc(sizeof(struct node)); //allocating memory for new node
+    ptr2->data = data; //put the new node data into ptr2
+    ptr2->link = NULL; //no need to link it now
 
-    if (pos == 1)
+    if (pos == 1) //if the postion is one(insert at the begining)
     {
-        ptr2->link = ptr;
-        *head = ptr2;
+        ptr2->link = ptr; //new node linked to the head (ptr contains head)
+        *head = ptr2; //now new node at beginnign will be considered as new head
     }
-    else
+    else        //if the position is not one.
     {
         while (pos != 2)
         {
-            ptr = ptr->link;
-            pos--;
+            ptr = ptr->link; //ptr starts traversing from head
+            pos--; //if 2, then will go 2, if 3 then will go 3
         }
-        ptr2->link = ptr->link;
-        ptr->link = ptr2;
+        ptr2->link = ptr->link; //ptr2 holds new node and ptr holds the current node after completing loop, so new node link will take the next node of current node
+        ptr->link = ptr2; //current node link will hold the new node
     }
 }
 
 int main()
 {
-    int data, pos;
+    int data, pos; //inputing data and the position
     printf("Enter the data & pos= ");
     scanf("%d %d", &data, &pos);
 
@@ -41,28 +41,28 @@ int main()
     head->data = 45;
     head->link = NULL;
 
-    struct node *head2 = (struct node *)malloc(sizeof(struct node));
-    head2->data = 98;
-    head2->link = NULL;
+    struct node *second = (struct node *)malloc(sizeof(struct node));
+    second->data = 98;
+    second->link = NULL;
 
-    struct node *head3 = (struct node *)malloc(sizeof(struct node));
-    head3->data = 45;
-    head3->link = NULL;
+    struct node *third = (struct node *)malloc(sizeof(struct node));
+    third->data = 45;
+    third->link = NULL;
 
-    head->link = head2;
-    head2->link = head3;
-    head3->link = NULL;
+    head->link = second;
+    second->link = third;
+    third->link = NULL;
 
     printf("Before inserting node at a certain point\n");
-    printf("%d->%d->%d->NULL", head->data, head2->data, head3->data);
+    printf("%d->%d->%d->NULL", head->data, second->data, third->data);
 
     printf("\n\n");
 
-    add_at_pos(&head, data, pos);
+    add_at_pos(&head, data, pos); //address of the head , the new node data, position of the node
 
     printf("After inserting in any position\n");
 
-    while (head != NULL)
+    while (head != NULL) //traversing through the nodes
     {
         printf("%d->", head->data);
         head = head->link;
