@@ -7,22 +7,24 @@ struct node
     struct node *link;
 };
 
-void del_last(struct node *head)
+void del_last(struct node **head)
 {
-    if (head == NULL) {
+    if (*head == NULL) {
         printf("List is empty. Cannot delete.\n");
         return;
     }
 
-    struct node *temp = head;
-    struct node *temp2 = head;
-    while(temp2->link!=NULL)
+    struct node *temp = *head; //initializing temp pointer with head pointer
+    struct node *temp2 = *head; //also initializing temp2 pointer with head pointer
+    while(temp2->link!=NULL) // temp2 will traverse to the end
     {
-        temp=temp2;
-        temp2=temp2->link;
+        temp=temp2;         //first whatever is in temp2 will be in temp
+        temp2=temp2->link;  //then temp2 will move to the next node
     }
-    temp->link=NULL;
-    free(temp2);
+
+        // temp2 will be always be one node ahead of temp
+    temp->link=NULL;    //temp will be the previous node of the last node after the loop, so temp will be unlinked with temp2
+    free(temp2);        // now free the temp2 (the last node)
     temp=NULL;
 }
 int main()
@@ -31,23 +33,23 @@ int main()
     head->data = 45;
     head->link = NULL;
 
-    struct node *head2 = (struct node *)malloc(sizeof(struct node));
-    head2->data = 98;
-    head2->link = NULL;
+    struct node *second = (struct node *)malloc(sizeof(struct node));
+    second->data = 98;
+    second->link = NULL;
 
-    struct node *head3 = (struct node *)malloc(sizeof(struct node));
-    head3->data = 45;
-    head3->link = NULL;
+    struct node *third = (struct node *)malloc(sizeof(struct node));
+    third->data = 45;
+    third->link = NULL;
 
-    head->link = head2;
-    head2->link = head3;
-    head3->link = NULL;
+    head->link = second;
+    second->link = third;
+    third->link = NULL;
 
-    printf("Before deleting first node\n");
-    printf("%d->%d->%d->NULL\n\n", head->data, head2->data, head3->data);
+    printf("Before deleting last node\n");
+    printf("%d->%d->%d->NULL\n\n", head->data, second->data, third->data);
 
-    del_last(head);
-    printf("After deleting first node\n");
+    del_last(&head);
+    printf("After deleting last node\n");
     while (head != NULL)
     {
         printf("%d->", head->data);
