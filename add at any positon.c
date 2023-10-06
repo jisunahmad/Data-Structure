@@ -4,7 +4,7 @@
 struct node
 {
     int data;
-    struct node *link;
+    struct node *link; //pointer of type node
 };
 
 void add_at_pos(struct node **head, int data, int pos)
