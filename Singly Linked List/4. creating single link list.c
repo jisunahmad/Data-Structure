@@ -10,17 +10,17 @@ int main()
     struct node *head= (struct node*)malloc(sizeof (struct node));
     head->data=45;
     head->link=NULL;
-    struct node *current= (struct node*)malloc(sizeof (struct node));
-    current->data=98;
-    current->link=NULL;
-    struct node *next= (struct node*)malloc(sizeof (struct node));
-    next->data=45;
-    next->link=NULL;
+    struct node *node1= (struct node*)malloc(sizeof (struct node));
+    node1->data=98;
+    node1->link=NULL;
+    struct node *node2= (struct node*)malloc(sizeof (struct node));
+    node2->data=45;
+    node2->link=NULL;
 
-    head->link=current;
-    current->link=next;
+    head->link=node1;
+    node1->link=node2;
 
 
-    printf("%d %d %d \t",head->data,current->data,next->data);
+    printf("%d %d %d \t",head->data,node1->data,node2->data);
 
 }
