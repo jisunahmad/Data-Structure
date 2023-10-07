@@ -5,16 +5,16 @@ struct node
 {
     int data;
     struct node *link;
-};//taking node ;
+};      //created a node ;
 int main()
 {
-    //take the first node name head and free it;
+    //take the first node name head and assign null to it;
     struct node *head= NULL;
 
-    //taking memory for struct node and give it to head pointer;
+    //taking memory for struct node and allocating it to head pointer;
     head=(struct node*)malloc(sizeof (struct node));
 
-    head->data=90;//intialize data;
+    head->data=90;      //intialize data;
     head->link=NULL;
 
     printf("%d",head->data);//print it;

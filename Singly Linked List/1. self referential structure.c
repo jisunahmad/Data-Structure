@@ -1,14 +1,14 @@
 #include<stdio.h>
-struct code
+struct code  //user defined data type 'code' using structure
 {
-    int i;
-    char c;
-    struct code *ptr;
+    int i;          //that have element int
+    char c;         //and a character
+    struct code *ptr;   //pointer of data type 'code'
 
 };
 int main()
 {
-    struct code var1;
+    struct code var1; //declaring 2 code type variables
     struct code var2;
 
     //for var 1;
