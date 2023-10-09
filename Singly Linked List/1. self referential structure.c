@@ -1,33 +1,39 @@
-#include<stdio.h>
-struct code  //user defined data type 'code' using structure
-{
-    int i;          //that have element int
-    char c;         //and a character
-    struct code *ptr;   //pointer of data type 'code'
+#include <stdio.h>
 
+// Define a structure named 'code' with two members: an integer 'i' and a character 'c',
+// along with a pointer to the same structure type 'ptr'.
+struct code
+{
+    int i;
+    char c;
+    struct code *ptr;
 };
+
 int main()
 {
-    struct code var1; //declaring 2 code type variables
+    // Declare two variables of type 'struct code'.
+    struct code var1;
     struct code var2;
 
-    //for var 1;
-    var1.i=65;
-    var1.c='A';
-    var1.ptr= NULL;
+    // Initialize the members of 'var1'.
+    var1.i = 65;
+    var1.c = 'A';
+    var1.ptr = NULL;
 
-    //for var 2;
-    var2.i=66;
-    var2.c='B';
-    var2.ptr= NULL;
+    // Initialize the members of 'var2'.
+    var2.i = 66;
+    var2.c = 'B';
+    var2.ptr = NULL;
 
-    var1.ptr=&var2;//var 1 will now contain the address of var2;
+    // Set the 'ptr' member of 'var1' to point to 'var2', creating a link between the two variables.
+    var1.ptr = &var2;
 
-    printf("%d %c\n",var1.i,var1.c);//printing var1;
+    // Print the values of 'i' and 'c' for 'var1'.
+    printf("%d %c\n", var1.i, var1.c);
 
-    printf("%d %c\n",var1.ptr->i,var1.ptr->c);//printing the i and c of var2 using var1;
+    // Print the values of 'i' and 'c' for the variable pointed to by 'var1.ptr',
+    // which is 'var2' in this case, using '->' notation.
+    printf("%d %c\n", var1.ptr->i, var1.ptr->c);
 
     return 0;
-
-
 }

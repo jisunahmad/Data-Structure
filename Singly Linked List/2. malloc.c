@@ -1,31 +1,40 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-//We didn't use structure here
-
 int main()
 {
-    int i,n;
-    printf("Enter your number of integers= ");
+    int i, n;
 
-    scanf("%d",&n);         //will take how many integer numbers;
+    // Prompt the user to enter the number of integers.
+    printf("Enter the number of integers: ");
+    scanf("%d", &n); // Read the input for the number of integers.
 
-    int *ptr= (int*)malloc(n*sizeof(int));      //size of integer 4 so 4*n and it will give the address to *ptr;
+    // Allocate memory dynamically for an array of integers based on the user's input.
+    int *ptr = (int*)malloc(n * sizeof(int));
 
-    if(ptr==NULL)//if there are no memory it will print no memory and exit;
+    // Check if memory allocation was successful.
+    if(ptr == NULL)
     {
-        printf("No memory for loccation");
+        // If memory allocation failed, print an error message and exit the program.
+        printf("No memory available for allocation.\n");
         exit(1);
     }
-    for(i=0; i<n; i++) //0 to n loop will continue
-    {
-        printf("Enter integer num= ");
-        scanf("%d",ptr+i);//ptr is address so it will ptr+i i=0 so there 1st integer will go then i=1 (ptr+1)*4 if ptr 1000 so 1001*4= 1004 there will go second integer;
 
-    }
-    for(i=0; i<n; i++)
+    // Loop to input integer values from the user.
+    for(i = 0; i < n; i++)
     {
-        printf("%d\t",*ptr+i); //ptr+i was adress so *ptr+i will be the integer num and it will(*ptr+i) print the number;
+        printf("Enter an integer: ");
+        scanf("%d", ptr + i); // Read and store the integer value in the dynamically allocated array.
     }
+
+    // Loop to print the entered integer values.
+    for(i = 0; i < n; i++)
+    {
+        printf("%d\t", *(ptr + i)); // Print the integer values from the dynamically allocated array.
+    }
+
+    // Free the dynamically allocated memory.
+    free(ptr);
+
     return 0;
 }

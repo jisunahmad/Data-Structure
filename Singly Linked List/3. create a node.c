@@ -1,25 +1,32 @@
-//Create a note and print it;
 #include<stdio.h>
 #include<stdlib.h>
+
+// Define a structure named 'node' with an integer 'data' and a pointer to the same structure type 'link'.
 struct node
 {
     int data;
     struct node *link;
-};      //created a node ;
+};
+
 int main()
 {
-    //take the first node name head and assign null to it;
-    struct node *head= NULL;
+    // Declare a pointer to a 'struct node' named 'head' and initialize it to NULL.
+    struct node *head = NULL;
 
-    //taking memory for struct node and allocating it to head pointer;
-    head=(struct node*)malloc(sizeof (struct node));
+    // Allocate memory for a 'struct node' and assign its address to the 'head' pointer.
+    head = (struct node*)malloc(sizeof(struct node));
 
-    head->data=90;      //intialize data;
-    head->link=NULL;
+    // Set the 'data' member of the 'head' node to 90.
+    head->data = 90;
 
-    printf("%d",head->data);//print it;
+    // Set the 'link' member of the 'head' node to NULL.
+    head->link = NULL;
 
-    free(head);//free the node;
+    // Print the 'data' member of the 'head' node.
+    printf("%d", head->data);
+
+    // Free the memory allocated for the 'head' node.
+    free(head);
+
     return 0;
-
 }
