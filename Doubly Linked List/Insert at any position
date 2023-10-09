@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *prev; // Pointer to the previous node
+    struct node *next; // Pointer to the next node
+};
+
+// Function to insert a node with data at a specified position in the doubly linked list
+void add_at_pos(struct node **head, int data, int pos)
+{
+    struct node *ptr = *head; // Pointer to traverse the list
+    struct node *newnode = (struct node *)malloc(sizeof(struct node)); // Allocate memory for the new node
+    newnode->data = data;
+    newnode->prev = NULL; // Initialize the previous pointer of the new node
+    newnode->next = NULL; // Initialize the next pointer of the new node
+
+    if (pos == 1) // If the position is 1 (insert at the beginning)
+    {
+        newnode->next = ptr; // New node's next points to the current head
+        ptr->prev = newnode; // Current head's previous points to the new node
+        *head = newnode; // Update the head to point to the new node
+    }
+    else
+    {
+        while (pos != 2) // Traverse to the node just before the desired position
+        {
+            ptr = ptr->next;
+            pos--;
+        }
+        newnode->prev = ptr; // New node's previous points to the current node
+        newnode->next = ptr->next; // New node's next points to the node after the current node
+        if (ptr->next != NULL) // If the current node is not the last node
+        {
+            ptr->next->prev = newnode; // Update the previous pointer of the node after the current node with n (now after the newnode)
+        }
+        ptr->next = newnode; // Update the next pointer of the current node to point to the new node
+    }
+}
+
+int main()
+{
+    int data, pos;
+    printf("Enter the data & pos= ");
+    scanf("%d %d", &data, &pos);
+
+    struct node *head = (struct node *)malloc(sizeof(struct node));
+    head->data = 45;
+    head->prev = NULL;
+    head->next = NULL;
+
+    struct node *second = (struct node *)malloc(sizeof(struct node));
+    second->data = 98;
+    second->prev = NULL;
+    second->next = NULL;
+
+    struct node *third = (struct node *)malloc(sizeof(struct node));
+    third->data = 45;
+    third->prev = NULL;
+    third->next = NULL;
+
+    head->next = second;
+    second->prev = head;
+    second->next = third;
+    third->prev = second;
+    third->next = NULL;
+
+    printf("Before inserting node at a certain point\n");
+    printf("%d<->%d<->%d<->NULL", head->data, second->data, third->data);
+
+    printf("\n\n");
+
+    add_at_pos(&head, data, pos);
+
+    printf("After inserting in any position\n");
+
+    while (head != NULL)
+    {
+        printf("%d<->", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+
+    return 0;
+}
