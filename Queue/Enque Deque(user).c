@@ -54,25 +54,7 @@ void dequeue()
 
     }
 }
-void display2()
-{
-     struct node *temp=front;
-    if(front==0 && rear==0)
-    {
-        printf("Empty");
-    }
-    else
-    {
-        while(temp!=0)
-        {
-            printf("%d->",temp->data);
-            temp=temp->link;
-        }
-        printf("NULL\n");
 
-}
-
-}
 void peek()
 {
     printf("Top element is now %d\n",front->data);
@@ -92,6 +74,6 @@ int main()
     printf("\n");
     printf("---Dequeue---\n");
     dequeue();
-    display2();
+    display();
     peek();
 }
